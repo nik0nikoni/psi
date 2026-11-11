@@ -21,6 +21,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\src\TicketGenerator.Core\TicketGenerator.Core.csproj" />
+    <ProjectReference Include="..\..\src\TicketGenerator.Infrastructure\TicketGenerator.Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>
