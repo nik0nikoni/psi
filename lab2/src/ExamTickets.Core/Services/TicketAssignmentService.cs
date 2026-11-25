@@ -4,7 +4,7 @@ using ExamTickets.Core.Models;
 
 namespace ExamTickets.Core.Services;
 
-public sealed class TicketAssignmentService
+public sealed class TicketAssignmentService : ITicketAssigner
 {
     private readonly IReadOnlyList<Ticket> _tickets;
     private readonly IResultJournal _journal;
