@@ -9,17 +9,26 @@ public sealed class MessageBoxNotifier : IUserNotifier
 
     public void ShowError(string message)
     {
-        MessageBox.Show(message, Caption, MessageBoxButton.OK, MessageBoxImage.Error);
+        Show(message, MessageBoxButton.OK, MessageBoxImage.Error);
     }
 
     public bool AskRetry(string message)
     {
-        var answer = MessageBox.Show(
+        var answer = Show(
             message + Environment.NewLine + Environment.NewLine + "Повторить попытку?",
-            Caption,
             MessageBoxButton.YesNo,
             MessageBoxImage.Warning);
 
         return answer == MessageBoxResult.Yes;
+    }
+
+    // Messages are owned by the main window once it is visible, so they stay on top of it.
+    private static MessageBoxResult Show(string message, MessageBoxButton buttons, MessageBoxImage image)
+    {
+        var owner = Application.Current?.MainWindow;
+
+        return owner is { IsVisible: true }
+            ? MessageBox.Show(owner, message, Caption, buttons, image)
+            : MessageBox.Show(message, Caption, buttons, image);
     }
 }

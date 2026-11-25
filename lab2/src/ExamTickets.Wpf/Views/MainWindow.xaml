@@ -19,7 +19,14 @@
                   AutomationProperties.AutomationId="StudentComboBox"
                   ItemsSource="{Binding Students}"
                   SelectedItem="{Binding SelectedStudent}"
-                  DisplayMemberPath="FullName" />
+                  DisplayMemberPath="FullName">
+            <ComboBox.ItemContainerStyle>
+                <!-- Screen readers and UI tests see the same "LastName FirstName" text as the user. -->
+                <Style TargetType="ComboBoxItem">
+                    <Setter Property="AutomationProperties.Name" Value="{Binding FullName}" />
+                </Style>
+            </ComboBox.ItemContainerStyle>
+        </ComboBox>
 
         <Button AutomationProperties.AutomationId="GenerateButton"
                 Content="Сгенерировать билет"
