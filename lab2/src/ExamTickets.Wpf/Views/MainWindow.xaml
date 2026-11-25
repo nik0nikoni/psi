@@ -1,0 +1,32 @@
+﻿<Window x:Class="ExamTickets.Wpf.Views.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Генератор билетов"
+        AutomationProperties.AutomationId="MainWindow"
+        Width="420"
+        SizeToContent="Height"
+        ResizeMode="CanMinimize"
+        WindowStartupLocation="CenterScreen">
+    <StackPanel Margin="16">
+        <Label Content="_Группа" Target="{Binding ElementName=GroupComboBox}" Padding="0,0,0,4" />
+        <ComboBox x:Name="GroupComboBox"
+                  AutomationProperties.AutomationId="GroupComboBox"
+                  ItemsSource="{Binding Groups}"
+                  SelectedItem="{Binding SelectedGroup}" />
+
+        <Label Content="_Студент" Target="{Binding ElementName=StudentComboBox}" Padding="0,12,0,4" />
+        <ComboBox x:Name="StudentComboBox"
+                  AutomationProperties.AutomationId="StudentComboBox"
+                  ItemsSource="{Binding Students}"
+                  SelectedItem="{Binding SelectedStudent}"
+                  DisplayMemberPath="FullName" />
+
+        <Button AutomationProperties.AutomationId="GenerateButton"
+                Content="Сгенерировать билет"
+                Command="{Binding GenerateCommand}"
+                IsDefault="True"
+                Margin="0,16,0,0"
+                Padding="12,6"
+                HorizontalAlignment="Right" />
+    </StackPanel>
+</Window>

@@ -47,6 +47,28 @@ public sealed class ExcelResultJournalTests : IDisposable
     }
 
     [Fact]
+    public void EnsureCreated_MissingFile_CreatesFileWithHeaderOnly()
+    {
+        new ExcelResultJournal(_filePath).EnsureCreated();
+
+        Assert.Equal(
+            [["Группа", "Фамилия", "Имя", "Номер билета", "Дата и время", "Повтор (да/нет)"]],
+            ReadRows());
+    }
+
+    [Fact]
+    public void EnsureCreated_ExistingFile_KeepsRows()
+    {
+        var journal = new ExcelResultJournal(_filePath);
+        journal.Append(Record("TI-221", Ivanov, 7, new DateTime(2026, 11, 25, 10, 0, 0), isRepeat: false));
+        var rowsBefore = ReadRows();
+
+        journal.EnsureCreated();
+
+        Assert.Equal(rowsBefore, ReadRows());
+    }
+
+    [Fact]
     public void Append_RepeatRecord_WritesYes()
     {
         new ExcelResultJournal(_filePath).Append(Record("TI-221", Ivanov, 7, DateTime.Now, isRepeat: true));

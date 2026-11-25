@@ -24,6 +24,25 @@ public sealed class ExcelResultJournal : IResultJournal
         _filePath = Path.GetFullPath(filePath);
     }
 
+    // Creates the journal with its header on application start; an existing file is left untouched.
+    public void EnsureCreated()
+    {
+        if (File.Exists(_filePath))
+        {
+            return;
+        }
+
+        try
+        {
+            using var workbook = CreateWorkbook();
+            Save(workbook);
+        }
+        catch (Exception exception) when (exception is IOException or UnauthorizedAccessException)
+        {
+            throw new JournalUnavailableException(_filePath, exception);
+        }
+    }
+
     public ResultRecord? FindFirst(string group, Student student)
     {
         if (!File.Exists(_filePath))
