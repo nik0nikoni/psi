@@ -4,6 +4,10 @@
     <ProjectReference Include="..\ExamTickets.Core\ExamTickets.Core.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <PackageReference Include="DocumentFormat.OpenXml" Version="3.1.1" />
+  </ItemGroup>
+
   <PropertyGroup>
     <TargetFramework>net10.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
