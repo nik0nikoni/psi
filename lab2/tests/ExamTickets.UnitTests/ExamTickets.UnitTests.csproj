@@ -24,4 +24,9 @@
     <ProjectReference Include="..\..\src\ExamTickets.Infrastructure\ExamTickets.Infrastructure.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <!-- Demo files from samples/ are checked by SampleFilesTests. -->
+    <None Include="..\..\samples\*.xlsx;..\..\samples\*.docx" LinkBase="samples" CopyToOutputDirectory="PreserveNewest" />
+  </ItemGroup>
+
 </Project>
